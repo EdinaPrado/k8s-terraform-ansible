@@ -1,0 +1,19 @@
+
+PLAY [Preparar todos os nós do cluster] ****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [k8s-worker-2]
+ok: [k8s-worker-1]
+ok: [k8s-control-plane]
+
+TASK [common : Atualizar cache e pacotes do apt] *******************************
+ok: [k8s-worker-2]
+ok: [k8s-control-plane]
+ok: [k8s-worker-1]
+
+TASK [common : Instalar pacotes base] ******************************************
+ok: [k8s-worker-2]
+ok: [k8s-control-plane]
+ok: [k8s-worker-1]
+
+TASK [common : Adicionar os nós do cluster no /etc/hosts] **********************
