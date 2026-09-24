@@ -26,3 +26,7 @@ pacotes_kubernetes:
 pod_network_cidr: "192.168.0.0/16"
 
 calico_version: "v3.31.2"
+
+aluno: "edina"
+app_replicas: 3
+app_nodeport: 30080

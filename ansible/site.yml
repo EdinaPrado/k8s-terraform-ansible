@@ -44,3 +44,12 @@
       ansible.builtin.debug:
         var: kubectl_nodes.stdout_lines
       tags: [validacao]
+
+- name: Publicar a aplicação NGINX no Kubernetes
+  hosts: control_plane
+  become: true
+  environment:
+    KUBECONFIG: /etc/kubernetes/admin.conf
+
+  roles:
+    - nginx-app

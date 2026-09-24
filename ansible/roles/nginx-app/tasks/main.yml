@@ -1,0 +1,29 @@
+---
+- name: Criar diretório dos manifestos
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/manifests"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+  tags: [app]
+
+- name: Gerar o manifesto do NGINX
+  ansible.builtin.template:
+    src: nginx.yaml.j2
+    dest: "/home/{{ ansible_user }}/manifests/nginx.yaml"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"
+  tags: [app]
+
+- name: Aplicar o Deployment e o Service do NGINX
+  ansible.builtin.command: kubectl apply -f /home/{{ ansible_user }}/manifests/nginx.yaml
+  register: nginx_apply
+  changed_when: "'created' in nginx_apply.stdout or 'configured' in nginx_apply.stdout"
+  tags: [app]
+
+- name: Esperar o Deployment ficar pronto
+  ansible.builtin.command: kubectl rollout status deployment/nginx --timeout=180s
+  changed_when: false
+  tags: [app]

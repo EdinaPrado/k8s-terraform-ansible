@@ -41,3 +41,8 @@ variable "aluno" {
   type    = string
   default = "edina"
 }
+
+variable "private_key_path" {
+  type    = string
+  default = "~/.ssh/k8s-lab"
+}
