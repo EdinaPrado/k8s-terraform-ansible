@@ -1,0 +1,45 @@
+---
+- name: Criar diretório de chaves do apt
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  tags: [kubernetes]
+
+- name: Baixar a chave GPG do repositório do Kubernetes
+  ansible.builtin.get_url:
+    url: "https://pkgs.k8s.io/core:/stable:/v{{ kubernetes_version }}/deb/Release.key"
+    dest: /etc/apt/keyrings/kubernetes-apt-keyring.asc
+    owner: root
+    group: root
+    mode: "0644"
+  tags: [kubernetes]
+
+- name: Adicionar o repositório apt do Kubernetes
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/v{{ kubernetes_version }}/deb/ /"
+    filename: kubernetes
+    state: present
+  tags: [kubernetes]
+
+- name: Instalar kubelet, kubeadm e kubectl
+  ansible.builtin.apt:
+    name: "{{ pacotes_kubernetes }}"
+    state: present
+    lock_timeout: 300
+  tags: [kubernetes]
+
+- name: Travar as versões dos pacotes (apt hold)
+  ansible.builtin.dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  loop: "{{ pacotes_kubernetes }}"
+  tags: [kubernetes]
+
+- name: Habilitar o kubelet
+  ansible.builtin.service:
+    name: kubelet
+    enabled: true
+  tags: [kubernetes]

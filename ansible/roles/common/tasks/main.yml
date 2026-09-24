@@ -1,0 +1,82 @@
+---
+- name: Atualizar cache e pacotes do apt
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: safe
+    cache_valid_time: 3600
+    lock_timeout: 300
+  tags: [pacotes]
+
+- name: Instalar pacotes base
+  ansible.builtin.apt:
+    name: "{{ pacotes_base }}"
+    state: present
+    lock_timeout: 300
+  tags: [pacotes]
+
+- name: Adicionar os nós do cluster no /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^\S+\s+{{ item }}$'
+    line: "{{ hostvars[item]['ansible_default_ipv4']['address'] }} {{ item }}"
+  loop: "{{ groups['k8s_cluster'] }}"
+  tags: [hosts]
+
+- name: Configurar hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+  tags: [hostname]
+
+- name: Impedir que o cloud-init reescreva o hostname
+  ansible.builtin.copy:
+    dest: /etc/cloud/cloud.cfg.d/99-preserve-hostname.cfg
+    content: "preserve_hostname: true\n"
+    owner: root
+    group: root
+    mode: "0644"
+  tags: [hostname]
+
+- name: Desligar o swap agora
+  ansible.builtin.command: swapoff -a
+  when: ansible_swaptotal_mb > 0
+  changed_when: true
+  tags: [swap]
+
+- name: Remover o swap do /etc/fstab
+  ansible.builtin.replace:
+    path: /etc/fstab
+    regexp: '^([^#].*\sswap\s.*)$'
+    replace: '# \1'
+  tags: [swap]
+
+- name: Carregar módulos do kernel no boot
+  ansible.builtin.copy:
+    dest: /etc/modules-load.d/k8s.conf
+    content: |
+      overlay
+      br_netfilter
+    owner: root
+    group: root
+    mode: "0644"
+  tags: [kernel]
+
+- name: Carregar módulos do kernel agora
+  community.general.modprobe:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ modulos_kernel }}"
+  tags: [kernel]
+
+- name: Configurar parâmetros de sysctl
+  ansible.posix.sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    sysctl_file: /etc/sysctl.d/99-kubernetes.conf
+    state: present
+    reload: false
+  loop: "{{ sysctl_params | dict2items }}"
+  notify: Recarregar sysctl
+  tags: [kernel, sysctl]
+
+- name: Aplicar os handlers pendentes agora
+  ansible.builtin.meta: flush_handlers

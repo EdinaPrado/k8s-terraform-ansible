@@ -1,0 +1,9 @@
+---
+- name: Preparar todos os nós do cluster
+  hosts: k8s_cluster
+  become: true
+
+  roles:
+    - common
+    - containerd
+    - kubernetes
