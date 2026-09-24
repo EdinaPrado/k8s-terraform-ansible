@@ -7,3 +7,10 @@
     - common
     - containerd
     - kubernetes
+
+- name: Inicializar o Control Plane e instalar o Calico
+  hosts: control_plane
+  become: true
+
+  roles:
+    - control-plane
