@@ -1,0 +1,53 @@
+### kubectl get nodes -o wide
+NAME                STATUS   ROLES           AGE     VERSION    INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+k8s-control-plane   Ready    control-plane   2m14s   v1.34.12   10.0.1.46     <none>        Ubuntu 24.04.5 LTS   7.0.0-1013-aws   containerd://2.2.1
+k8s-worker-1        Ready    <none>          98s     v1.34.12   10.0.2.134    <none>        Ubuntu 24.04.5 LTS   7.0.0-1013-aws   containerd://2.2.1
+k8s-worker-2        Ready    <none>          98s     v1.34.12   10.0.2.220    <none>        Ubuntu 24.04.5 LTS   7.0.0-1013-aws   containerd://2.2.1
+
+### kubectl get pods -A
+NAMESPACE     NAME                                        READY   STATUS    RESTARTS   AGE
+default       nginx-7bcfc56db8-4q8mw                      1/1     Running   0          41s
+default       nginx-7bcfc56db8-chllm                      1/1     Running   0          41s
+default       nginx-7bcfc56db8-zfl7w                      1/1     Running   0          41s
+kube-system   calico-kube-controllers-5c676f698c-8c5lx    1/1     Running   0          118s
+kube-system   calico-node-ct25n                           1/1     Running   0          118s
+kube-system   calico-node-mlzxk                           1/1     Running   0          102s
+kube-system   calico-node-v27wt                           1/1     Running   0          102s
+kube-system   coredns-66bc5c9577-dp444                    1/1     Running   0          2m8s
+kube-system   coredns-66bc5c9577-gmg8f                    1/1     Running   0          2m8s
+kube-system   etcd-k8s-control-plane                      1/1     Running   0          2m16s
+kube-system   kube-apiserver-k8s-control-plane            1/1     Running   0          2m14s
+kube-system   kube-controller-manager-k8s-control-plane   1/1     Running   0          2m15s
+kube-system   kube-proxy-2vkdv                            1/1     Running   0          2m8s
+kube-system   kube-proxy-flzg5                            1/1     Running   0          102s
+kube-system   kube-proxy-r8hzw                            1/1     Running   0          102s
+kube-system   kube-scheduler-k8s-control-plane            1/1     Running   0          2m14s
+
+### kubectl get svc -A
+NAMESPACE     NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                  AGE
+default       kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP                  2m21s
+default       nginx        NodePort    10.107.86.236   <none>        80:30080/TCP             46s
+kube-system   kube-dns     ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP   2m20s
+
+### kubectl get deployment
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   3/3     3            3           50s
+
+### kubectl get pods -o wide
+NAME                     READY   STATUS    RESTARTS   AGE   IP              NODE           NOMINATED NODE   READINESS GATES
+nginx-7bcfc56db8-4q8mw   1/1     Running   0          55s   192.168.140.1   k8s-worker-2   <none>           <none>
+nginx-7bcfc56db8-chllm   1/1     Running   0          55s   192.168.230.1   k8s-worker-1   <none>           <none>
+nginx-7bcfc56db8-zfl7w   1/1     Running   0          55s   192.168.230.2   k8s-worker-1   <none>           <none>
+
+### kubectl get svc
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        2m34s
+nginx        NodePort    10.107.86.236   <none>        80:30080/TCP   59s
+
+### Teste do NGINX via NodePort 30080 (6 requisicoes)
+Pod: nginx-7bcfc56db8-chllm
+Pod: nginx-7bcfc56db8-zfl7w
+Pod: nginx-7bcfc56db8-zfl7w
+Pod: nginx-7bcfc56db8-chllm
+Pod: nginx-7bcfc56db8-chllm
+Pod: nginx-7bcfc56db8-zfl7w
