@@ -1,18 +1,22 @@
-data.aws_ami.ubuntu: Reading...
+data.aws_availability_zones.disponiveis: Reading...
 aws_key_pair.k8s: Refreshing state... [id=k8s-lab-key-edina]
-aws_vpc.k8s: Refreshing state... [id=vpc-008345f0f85f19f5f]
+aws_vpc.k8s: Refreshing state... [id=vpc-067e6ab3e10bfaa67]
+data.aws_ami.ubuntu: Reading...
+data.aws_availability_zones.disponiveis: Read complete after 1s [id=us-east-1]
 data.aws_ami.ubuntu: Read complete after 1s [id=ami-0045d7fc2ad003464]
-aws_internet_gateway.k8s: Refreshing state... [id=igw-086f0f60cc289e4b8]
-aws_subnet.control_plane: Refreshing state... [id=subnet-0bd4bd9273af56dd3]
-aws_subnet.workers: Refreshing state... [id=subnet-0d4c5b8e0245bc8e8]
-aws_security_group.k8s: Refreshing state... [id=sg-059563a3a8fe593e7]
-aws_route_table.public: Refreshing state... [id=rtb-00a57aca1e99cafbe]
-aws_instance.control_plane: Refreshing state... [id=i-0a6a88406081ec4bd]
-aws_instance.worker[0]: Refreshing state... [id=i-053875a5c01d80494]
-aws_instance.worker[1]: Refreshing state... [id=i-0dad4b21340c3e16b]
-aws_route_table_association.control_plane: Refreshing state... [id=rtbassoc-08f5d933012b5dca0]
-aws_route_table_association.workers: Refreshing state... [id=rtbassoc-0bd44746fc473c8d0]
-local_file.ansible_inventory: Refreshing state... [id=76d8ab2006097bc57f578552216c53c248548723]
+aws_internet_gateway.k8s: Refreshing state... [id=igw-019a645b9354ba538]
+aws_subnet.workers[1]: Refreshing state... [id=subnet-0b51ea0d7257086a4]
+aws_subnet.workers[0]: Refreshing state... [id=subnet-057e458de7097eb89]
+aws_subnet.control_plane: Refreshing state... [id=subnet-0e1c98b6cef783662]
+aws_security_group.k8s: Refreshing state... [id=sg-0e85296f3948c04ca]
+aws_route_table.public: Refreshing state... [id=rtb-0ced40d42d9017245]
+aws_route_table_association.workers[0]: Refreshing state... [id=rtbassoc-07244347391c5661f]
+aws_route_table_association.control_plane: Refreshing state... [id=rtbassoc-08b578ebd8f42750a]
+aws_route_table_association.workers[1]: Refreshing state... [id=rtbassoc-072a7f67ea44ea327]
+aws_instance.control_plane: Refreshing state... [id=i-0f65a1f361e1ead27]
+aws_instance.worker[1]: Refreshing state... [id=i-0c91b1de49ec42b7d]
+aws_instance.worker[0]: Refreshing state... [id=i-04c81a4c658f98f36]
+local_file.ansible_inventory: Refreshing state... [id=744c7d42558153d60d0b7f4cf8bf7bb80986795b]
 
 Terraform used the selected providers to generate the following execution
 plan. Resource actions are indicated with the following symbols:
@@ -23,9 +27,9 @@ Terraform will perform the following actions:
   # aws_instance.control_plane will be destroyed
   - resource "aws_instance" "control_plane" {
       - ami                                  = "ami-0045d7fc2ad003464" -> null
-      - arn                                  = "arn:aws:ec2:us-east-1:794196173640:instance/i-0a6a88406081ec4bd" -> null
+      - arn                                  = "arn:aws:ec2:us-east-1:794196173640:instance/i-0f65a1f361e1ead27" -> null
       - associate_public_ip_address          = true -> null
-      - availability_zone                    = "us-east-1c" -> null
+      - availability_zone                    = "us-east-1a" -> null
       - cpu_core_count                       = 1 -> null
       - cpu_threads_per_core                 = 2 -> null
       - disable_api_stop                     = false -> null
@@ -33,7 +37,7 @@ Terraform will perform the following actions:
       - ebs_optimized                        = false -> null
       - get_password_data                    = false -> null
       - hibernation                          = false -> null
-      - id                                   = "i-0a6a88406081ec4bd" -> null
+      - id                                   = "i-0f65a1f361e1ead27" -> null
       - instance_initiated_shutdown_behavior = "stop" -> null
       - instance_state                       = "running" -> null
       - instance_type                        = "t3.small" -> null
@@ -42,15 +46,15 @@ Terraform will perform the following actions:
       - key_name                             = "k8s-lab-key-edina" -> null
       - monitoring                           = false -> null
       - placement_partition_number           = 0 -> null
-      - primary_network_interface_id         = "eni-069693089ccee2a46" -> null
-      - private_dns                          = "ip-10-0-1-46.ec2.internal" -> null
-      - private_ip                           = "10.0.1.46" -> null
-      - public_dns                           = "ec2-44-199-213-16.compute-1.amazonaws.com" -> null
-      - public_ip                            = "44.199.213.16" -> null
+      - primary_network_interface_id         = "eni-0e116ef2e58dd76f1" -> null
+      - private_dns                          = "ip-10-0-1-139.ec2.internal" -> null
+      - private_ip                           = "10.0.1.139" -> null
+      - public_dns                           = "ec2-54-226-120-81.compute-1.amazonaws.com" -> null
+      - public_ip                            = "54.226.120.81" -> null
       - secondary_private_ips                = [] -> null
       - security_groups                      = [] -> null
       - source_dest_check                    = true -> null
-      - subnet_id                            = "subnet-0bd4bd9273af56dd3" -> null
+      - subnet_id                            = "subnet-0e1c98b6cef783662" -> null
       - tags                                 = {
           - "Name" = "k8s-control-plane-edina"
         } -> null
@@ -62,7 +66,7 @@ Terraform will perform the following actions:
       - tenancy                              = "default" -> null
       - user_data_replace_on_change          = false -> null
       - vpc_security_group_ids               = [
-          - "sg-059563a3a8fe593e7",
+          - "sg-0e85296f3948c04ca",
         ] -> null
         # (7 unchanged attributes hidden)
 
@@ -113,7 +117,7 @@ Terraform will perform the following actions:
               - "Projeto" = "k8s-terraform-ansible"
             } -> null
           - throughput            = 125 -> null
-          - volume_id             = "vol-0f59b7cfc836ceec1" -> null
+          - volume_id             = "vol-057e5747dd461c991" -> null
           - volume_size           = 20 -> null
           - volume_type           = "gp3" -> null
             # (1 unchanged attribute hidden)
@@ -123,9 +127,9 @@ Terraform will perform the following actions:
   # aws_instance.worker[0] will be destroyed
   - resource "aws_instance" "worker" {
       - ami                                  = "ami-0045d7fc2ad003464" -> null
-      - arn                                  = "arn:aws:ec2:us-east-1:794196173640:instance/i-053875a5c01d80494" -> null
+      - arn                                  = "arn:aws:ec2:us-east-1:794196173640:instance/i-04c81a4c658f98f36" -> null
       - associate_public_ip_address          = true -> null
-      - availability_zone                    = "us-east-1c" -> null
+      - availability_zone                    = "us-east-1a" -> null
       - cpu_core_count                       = 1 -> null
       - cpu_threads_per_core                 = 2 -> null
       - disable_api_stop                     = false -> null
@@ -133,7 +137,7 @@ Terraform will perform the following actions:
       - ebs_optimized                        = false -> null
       - get_password_data                    = false -> null
       - hibernation                          = false -> null
-      - id                                   = "i-053875a5c01d80494" -> null
+      - id                                   = "i-04c81a4c658f98f36" -> null
       - instance_initiated_shutdown_behavior = "stop" -> null
       - instance_state                       = "running" -> null
       - instance_type                        = "t3.small" -> null
@@ -142,15 +146,15 @@ Terraform will perform the following actions:
       - key_name                             = "k8s-lab-key-edina" -> null
       - monitoring                           = false -> null
       - placement_partition_number           = 0 -> null
-      - primary_network_interface_id         = "eni-00584d71bbd49e2c5" -> null
-      - private_dns                          = "ip-10-0-2-134.ec2.internal" -> null
-      - private_ip                           = "10.0.2.134" -> null
-      - public_dns                           = "ec2-32-199-197-252.compute-1.amazonaws.com" -> null
-      - public_ip                            = "32.199.197.252" -> null
+      - primary_network_interface_id         = "eni-0f1d4f195ff8539a3" -> null
+      - private_dns                          = "ip-10-0-2-45.ec2.internal" -> null
+      - private_ip                           = "10.0.2.45" -> null
+      - public_dns                           = "ec2-98-93-49-46.compute-1.amazonaws.com" -> null
+      - public_ip                            = "98.93.49.46" -> null
       - secondary_private_ips                = [] -> null
       - security_groups                      = [] -> null
       - source_dest_check                    = true -> null
-      - subnet_id                            = "subnet-0d4c5b8e0245bc8e8" -> null
+      - subnet_id                            = "subnet-057e458de7097eb89" -> null
       - tags                                 = {
           - "Name" = "k8s-worker-1-edina"
         } -> null
@@ -162,7 +166,7 @@ Terraform will perform the following actions:
       - tenancy                              = "default" -> null
       - user_data_replace_on_change          = false -> null
       - vpc_security_group_ids               = [
-          - "sg-059563a3a8fe593e7",
+          - "sg-0e85296f3948c04ca",
         ] -> null
         # (7 unchanged attributes hidden)
 
@@ -213,7 +217,7 @@ Terraform will perform the following actions:
               - "Projeto" = "k8s-terraform-ansible"
             } -> null
           - throughput            = 125 -> null
-          - volume_id             = "vol-04f3e980d0bc9df7e" -> null
+          - volume_id             = "vol-076c6d33a8a560fc4" -> null
           - volume_size           = 20 -> null
           - volume_type           = "gp3" -> null
             # (1 unchanged attribute hidden)
@@ -223,9 +227,9 @@ Terraform will perform the following actions:
   # aws_instance.worker[1] will be destroyed
   - resource "aws_instance" "worker" {
       - ami                                  = "ami-0045d7fc2ad003464" -> null
-      - arn                                  = "arn:aws:ec2:us-east-1:794196173640:instance/i-0dad4b21340c3e16b" -> null
+      - arn                                  = "arn:aws:ec2:us-east-1:794196173640:instance/i-0c91b1de49ec42b7d" -> null
       - associate_public_ip_address          = true -> null
-      - availability_zone                    = "us-east-1c" -> null
+      - availability_zone                    = "us-east-1b" -> null
       - cpu_core_count                       = 1 -> null
       - cpu_threads_per_core                 = 2 -> null
       - disable_api_stop                     = false -> null
@@ -233,7 +237,7 @@ Terraform will perform the following actions:
       - ebs_optimized                        = false -> null
       - get_password_data                    = false -> null
       - hibernation                          = false -> null
-      - id                                   = "i-0dad4b21340c3e16b" -> null
+      - id                                   = "i-0c91b1de49ec42b7d" -> null
       - instance_initiated_shutdown_behavior = "stop" -> null
       - instance_state                       = "running" -> null
       - instance_type                        = "t3.small" -> null
@@ -242,15 +246,15 @@ Terraform will perform the following actions:
       - key_name                             = "k8s-lab-key-edina" -> null
       - monitoring                           = false -> null
       - placement_partition_number           = 0 -> null
-      - primary_network_interface_id         = "eni-0193879001b8d5b45" -> null
-      - private_dns                          = "ip-10-0-2-220.ec2.internal" -> null
-      - private_ip                           = "10.0.2.220" -> null
-      - public_dns                           = "ec2-32-197-187-64.compute-1.amazonaws.com" -> null
-      - public_ip                            = "32.197.187.64" -> null
+      - primary_network_interface_id         = "eni-01ddbe70e328bfd3f" -> null
+      - private_dns                          = "ip-10-0-2-146.ec2.internal" -> null
+      - private_ip                           = "10.0.2.146" -> null
+      - public_dns                           = "ec2-32-197-240-195.compute-1.amazonaws.com" -> null
+      - public_ip                            = "32.197.240.195" -> null
       - secondary_private_ips                = [] -> null
       - security_groups                      = [] -> null
       - source_dest_check                    = true -> null
-      - subnet_id                            = "subnet-0d4c5b8e0245bc8e8" -> null
+      - subnet_id                            = "subnet-0b51ea0d7257086a4" -> null
       - tags                                 = {
           - "Name" = "k8s-worker-2-edina"
         } -> null
@@ -262,7 +266,7 @@ Terraform will perform the following actions:
       - tenancy                              = "default" -> null
       - user_data_replace_on_change          = false -> null
       - vpc_security_group_ids               = [
-          - "sg-059563a3a8fe593e7",
+          - "sg-0e85296f3948c04ca",
         ] -> null
         # (7 unchanged attributes hidden)
 
@@ -313,7 +317,7 @@ Terraform will perform the following actions:
               - "Projeto" = "k8s-terraform-ansible"
             } -> null
           - throughput            = 125 -> null
-          - volume_id             = "vol-0685426835bc4aa17" -> null
+          - volume_id             = "vol-078f99dde2f037fba" -> null
           - volume_size           = 20 -> null
           - volume_type           = "gp3" -> null
             # (1 unchanged attribute hidden)
@@ -322,18 +326,18 @@ Terraform will perform the following actions:
 
   # aws_internet_gateway.k8s will be destroyed
   - resource "aws_internet_gateway" "k8s" {
-      - arn      = "arn:aws:ec2:us-east-1:794196173640:internet-gateway/igw-086f0f60cc289e4b8" -> null
-      - id       = "igw-086f0f60cc289e4b8" -> null
+      - arn      = "arn:aws:ec2:us-east-1:794196173640:internet-gateway/igw-019a645b9354ba538" -> null
+      - id       = "igw-019a645b9354ba538" -> null
       - owner_id = "794196173640" -> null
       - tags     = {
-          - "Name" = "k8s-igw-edina"
+          - "Name" = "k8s-igw"
         } -> null
       - tags_all = {
           - "Aluno"   = "edina"
-          - "Name"    = "k8s-igw-edina"
+          - "Name"    = "k8s-igw"
           - "Projeto" = "k8s-terraform-ansible"
         } -> null
-      - vpc_id   = "vpc-008345f0f85f19f5f" -> null
+      - vpc_id   = "vpc-067e6ab3e10bfaa67" -> null
     }
 
   # aws_key_pair.k8s will be destroyed
@@ -342,7 +346,7 @@ Terraform will perform the following actions:
       - fingerprint     = "LxZqEeoxhDrN7tQT4aIqcbw6wXtUTyhE3qWmj9rZMSQ=" -> null
       - id              = "k8s-lab-key-edina" -> null
       - key_name        = "k8s-lab-key-edina" -> null
-      - key_pair_id     = "key-03f4e25613528dd36" -> null
+      - key_pair_id     = "key-03dd0aed0fa5106bf" -> null
       - key_type        = "ed25519" -> null
       - public_key      = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIASXhuojbnCB8mitudkFjstgE3UHN3C+6Qdy3tAnPaYS edina@BUE0102D024" -> null
       - tags            = {} -> null
@@ -355,47 +359,55 @@ Terraform will perform the following actions:
 
   # aws_route_table.public will be destroyed
   - resource "aws_route_table" "public" {
-      - arn              = "arn:aws:ec2:us-east-1:794196173640:route-table/rtb-00a57aca1e99cafbe" -> null
-      - id               = "rtb-00a57aca1e99cafbe" -> null
+      - arn              = "arn:aws:ec2:us-east-1:794196173640:route-table/rtb-0ced40d42d9017245" -> null
+      - id               = "rtb-0ced40d42d9017245" -> null
       - owner_id         = "794196173640" -> null
       - propagating_vgws = [] -> null
       - route            = [
           - {
               - cidr_block                 = "0.0.0.0/0"
-              - gateway_id                 = "igw-086f0f60cc289e4b8"
+              - gateway_id                 = "igw-019a645b9354ba538"
                 # (11 unchanged attributes hidden)
             },
         ] -> null
       - tags             = {
-          - "Name" = "k8s-rt-public-edina"
+          - "Name" = "k8s-rt-public"
         } -> null
       - tags_all         = {
           - "Aluno"   = "edina"
-          - "Name"    = "k8s-rt-public-edina"
+          - "Name"    = "k8s-rt-public"
           - "Projeto" = "k8s-terraform-ansible"
         } -> null
-      - vpc_id           = "vpc-008345f0f85f19f5f" -> null
+      - vpc_id           = "vpc-067e6ab3e10bfaa67" -> null
     }
 
   # aws_route_table_association.control_plane will be destroyed
   - resource "aws_route_table_association" "control_plane" {
-      - id             = "rtbassoc-08f5d933012b5dca0" -> null
-      - route_table_id = "rtb-00a57aca1e99cafbe" -> null
-      - subnet_id      = "subnet-0bd4bd9273af56dd3" -> null
+      - id             = "rtbassoc-08b578ebd8f42750a" -> null
+      - route_table_id = "rtb-0ced40d42d9017245" -> null
+      - subnet_id      = "subnet-0e1c98b6cef783662" -> null
         # (1 unchanged attribute hidden)
     }
 
-  # aws_route_table_association.workers will be destroyed
+  # aws_route_table_association.workers[0] will be destroyed
   - resource "aws_route_table_association" "workers" {
-      - id             = "rtbassoc-0bd44746fc473c8d0" -> null
-      - route_table_id = "rtb-00a57aca1e99cafbe" -> null
-      - subnet_id      = "subnet-0d4c5b8e0245bc8e8" -> null
+      - id             = "rtbassoc-07244347391c5661f" -> null
+      - route_table_id = "rtb-0ced40d42d9017245" -> null
+      - subnet_id      = "subnet-057e458de7097eb89" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # aws_route_table_association.workers[1] will be destroyed
+  - resource "aws_route_table_association" "workers" {
+      - id             = "rtbassoc-072a7f67ea44ea327" -> null
+      - route_table_id = "rtb-0ced40d42d9017245" -> null
+      - subnet_id      = "subnet-0b51ea0d7257086a4" -> null
         # (1 unchanged attribute hidden)
     }
 
   # aws_security_group.k8s will be destroyed
   - resource "aws_security_group" "k8s" {
-      - arn                    = "arn:aws:ec2:us-east-1:794196173640:security-group/sg-059563a3a8fe593e7" -> null
+      - arn                    = "arn:aws:ec2:us-east-1:794196173640:security-group/sg-0e85296f3948c04ca" -> null
       - description            = "Security Group do cluster Kubernetes" -> null
       - egress                 = [
           - {
@@ -412,7 +424,7 @@ Terraform will perform the following actions:
                 # (1 unchanged attribute hidden)
             },
         ] -> null
-      - id                     = "sg-059563a3a8fe593e7" -> null
+      - id                     = "sg-0e85296f3948c04ca" -> null
       - ingress                = [
           - {
               - cidr_blocks      = [
@@ -487,91 +499,120 @@ Terraform will perform the following actions:
           - "Name"    = "k8s-lab-sg-edina"
           - "Projeto" = "k8s-terraform-ansible"
         } -> null
-      - vpc_id                 = "vpc-008345f0f85f19f5f" -> null
+      - vpc_id                 = "vpc-067e6ab3e10bfaa67" -> null
         # (1 unchanged attribute hidden)
     }
 
   # aws_subnet.control_plane will be destroyed
   - resource "aws_subnet" "control_plane" {
-      - arn                                            = "arn:aws:ec2:us-east-1:794196173640:subnet/subnet-0bd4bd9273af56dd3" -> null
+      - arn                                            = "arn:aws:ec2:us-east-1:794196173640:subnet/subnet-0e1c98b6cef783662" -> null
       - assign_ipv6_address_on_creation                = false -> null
-      - availability_zone                              = "us-east-1c" -> null
-      - availability_zone_id                           = "use1-az1" -> null
+      - availability_zone                              = "us-east-1a" -> null
+      - availability_zone_id                           = "use1-az4" -> null
       - cidr_block                                     = "10.0.1.0/24" -> null
       - enable_dns64                                   = false -> null
       - enable_lni_at_device_index                     = 0 -> null
       - enable_resource_name_dns_a_record_on_launch    = false -> null
       - enable_resource_name_dns_aaaa_record_on_launch = false -> null
-      - id                                             = "subnet-0bd4bd9273af56dd3" -> null
+      - id                                             = "subnet-0e1c98b6cef783662" -> null
       - ipv6_native                                    = false -> null
       - map_customer_owned_ip_on_launch                = false -> null
       - map_public_ip_on_launch                        = true -> null
       - owner_id                                       = "794196173640" -> null
       - private_dns_hostname_type_on_launch            = "ip-name" -> null
       - tags                                           = {
-          - "Name" = "k8s-subnet-control-plane-edina"
+          - "Name" = "k8s-subnet-control-plane"
         } -> null
       - tags_all                                       = {
           - "Aluno"   = "edina"
-          - "Name"    = "k8s-subnet-control-plane-edina"
+          - "Name"    = "k8s-subnet-control-plane"
           - "Projeto" = "k8s-terraform-ansible"
         } -> null
-      - vpc_id                                         = "vpc-008345f0f85f19f5f" -> null
+      - vpc_id                                         = "vpc-067e6ab3e10bfaa67" -> null
         # (4 unchanged attributes hidden)
     }
 
-  # aws_subnet.workers will be destroyed
+  # aws_subnet.workers[0] will be destroyed
   - resource "aws_subnet" "workers" {
-      - arn                                            = "arn:aws:ec2:us-east-1:794196173640:subnet/subnet-0d4c5b8e0245bc8e8" -> null
+      - arn                                            = "arn:aws:ec2:us-east-1:794196173640:subnet/subnet-057e458de7097eb89" -> null
       - assign_ipv6_address_on_creation                = false -> null
-      - availability_zone                              = "us-east-1c" -> null
-      - availability_zone_id                           = "use1-az1" -> null
-      - cidr_block                                     = "10.0.2.0/24" -> null
+      - availability_zone                              = "us-east-1a" -> null
+      - availability_zone_id                           = "use1-az4" -> null
+      - cidr_block                                     = "10.0.2.0/25" -> null
       - enable_dns64                                   = false -> null
       - enable_lni_at_device_index                     = 0 -> null
       - enable_resource_name_dns_a_record_on_launch    = false -> null
       - enable_resource_name_dns_aaaa_record_on_launch = false -> null
-      - id                                             = "subnet-0d4c5b8e0245bc8e8" -> null
+      - id                                             = "subnet-057e458de7097eb89" -> null
       - ipv6_native                                    = false -> null
       - map_customer_owned_ip_on_launch                = false -> null
       - map_public_ip_on_launch                        = true -> null
       - owner_id                                       = "794196173640" -> null
       - private_dns_hostname_type_on_launch            = "ip-name" -> null
       - tags                                           = {
-          - "Name" = "k8s-subnet-workers-edina"
+          - "Name" = "k8s-subnet-workers-1"
         } -> null
       - tags_all                                       = {
           - "Aluno"   = "edina"
-          - "Name"    = "k8s-subnet-workers-edina"
+          - "Name"    = "k8s-subnet-workers-1"
           - "Projeto" = "k8s-terraform-ansible"
         } -> null
-      - vpc_id                                         = "vpc-008345f0f85f19f5f" -> null
+      - vpc_id                                         = "vpc-067e6ab3e10bfaa67" -> null
+        # (4 unchanged attributes hidden)
+    }
+
+  # aws_subnet.workers[1] will be destroyed
+  - resource "aws_subnet" "workers" {
+      - arn                                            = "arn:aws:ec2:us-east-1:794196173640:subnet/subnet-0b51ea0d7257086a4" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1b" -> null
+      - availability_zone_id                           = "use1-az6" -> null
+      - cidr_block                                     = "10.0.2.128/25" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-0b51ea0d7257086a4" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = true -> null
+      - owner_id                                       = "794196173640" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "k8s-subnet-workers-2"
+        } -> null
+      - tags_all                                       = {
+          - "Aluno"   = "edina"
+          - "Name"    = "k8s-subnet-workers-2"
+          - "Projeto" = "k8s-terraform-ansible"
+        } -> null
+      - vpc_id                                         = "vpc-067e6ab3e10bfaa67" -> null
         # (4 unchanged attributes hidden)
     }
 
   # aws_vpc.k8s will be destroyed
   - resource "aws_vpc" "k8s" {
-      - arn                                  = "arn:aws:ec2:us-east-1:794196173640:vpc/vpc-008345f0f85f19f5f" -> null
+      - arn                                  = "arn:aws:ec2:us-east-1:794196173640:vpc/vpc-067e6ab3e10bfaa67" -> null
       - assign_generated_ipv6_cidr_block     = false -> null
       - cidr_block                           = "10.0.0.0/16" -> null
-      - default_network_acl_id               = "acl-0c21850f8522b83d4" -> null
-      - default_route_table_id               = "rtb-0260afcd86abbbd79" -> null
-      - default_security_group_id            = "sg-0528df52b76ab0abd" -> null
+      - default_network_acl_id               = "acl-0b1a8621bc227c0a5" -> null
+      - default_route_table_id               = "rtb-0c48a0822d5ac36b9" -> null
+      - default_security_group_id            = "sg-07219b23c102bb59f" -> null
       - dhcp_options_id                      = "dopt-07248c0b0a476a81b" -> null
       - enable_dns_hostnames                 = true -> null
       - enable_dns_support                   = true -> null
       - enable_network_address_usage_metrics = false -> null
-      - id                                   = "vpc-008345f0f85f19f5f" -> null
+      - id                                   = "vpc-067e6ab3e10bfaa67" -> null
       - instance_tenancy                     = "default" -> null
       - ipv6_netmask_length                  = 0 -> null
-      - main_route_table_id                  = "rtb-0260afcd86abbbd79" -> null
+      - main_route_table_id                  = "rtb-0c48a0822d5ac36b9" -> null
       - owner_id                             = "794196173640" -> null
       - tags                                 = {
-          - "Name" = "k8s-vpc-edina"
+          - "Name" = "k8s-vpc"
         } -> null
       - tags_all                             = {
           - "Aluno"   = "edina"
-          - "Name"    = "k8s-vpc-edina"
+          - "Name"    = "k8s-vpc"
           - "Projeto" = "k8s-terraform-ansible"
         } -> null
         # (4 unchanged attributes hidden)
@@ -581,11 +622,11 @@ Terraform will perform the following actions:
   - resource "local_file" "ansible_inventory" {
       - content              = <<-EOT
             [control_plane]
-            k8s-control-plane ansible_host=44.199.213.16
+            k8s-control-plane ansible_host=54.226.120.81
             
             [workers]
-            k8s-worker-1 ansible_host=32.199.197.252
-            k8s-worker-2 ansible_host=32.197.187.64
+            k8s-worker-1 ansible_host=98.93.49.46
+            k8s-worker-2 ansible_host=32.197.240.195
             
             [k8s_cluster:children]
             control_plane
@@ -596,67 +637,70 @@ Terraform will perform the following actions:
             ansible_ssh_private_key_file=~/.ssh/k8s-lab
             ansible_ssh_common_args='-o StrictHostKeyChecking=accept-new'
         EOT -> null
-      - content_base64sha256 = "sVaT/8YYQhyZ3CtfQNiYhJ/fXv0Ke5N2+AlrbgfxW4Y=" -> null
-      - content_base64sha512 = "MitLwcrsnO2bxVt1LEkiFtu7QvRuoLna7w6o4Knawan8OsXeqDM2EQ5IT3Z7r3nctzamFBQyAMZvDUZj1Dqn9w==" -> null
-      - content_md5          = "40c82261048039d195f18a9a1d16fde3" -> null
-      - content_sha1         = "76d8ab2006097bc57f578552216c53c248548723" -> null
-      - content_sha256       = "b15693ffc618421c99dc2b5f40d898849fdf5efd0a7b9376f8096b6e07f15b86" -> null
-      - content_sha512       = "322b4bc1caec9ced9bc55b752c492216dbbb42f46ea0b9daef0ea8e0a9dac1a9fc3ac5dea83336110e484f767baf79dcb736a614143200c66f0d4663d43aa7f7" -> null
+      - content_base64sha256 = "rY8JnZ5flLCly6NB5Y7PDmJa13Fbu8eIaPo4AcF80Q0=" -> null
+      - content_base64sha512 = "vp1q+Qua5T6R367if66ZPz9q0Qkr9n95Ii1YLQC1o7+4zUFkHHecGCYeg+pgN8rElZZkqxXzKR2vYln2O1ayvw==" -> null
+      - content_md5          = "8bdaf55984bfaccd5983b7c3e2c10e53" -> null
+      - content_sha1         = "744c7d42558153d60d0b7f4cf8bf7bb80986795b" -> null
+      - content_sha256       = "ad8f099d9e5f94b0a5cba341e58ecf0e625ad7715bbbc78868fa3801c17cd10d" -> null
+      - content_sha512       = "be9d6af90b9ae53e91dfaee27fae993f3f6ad1092bf67f79222d582d00b5a3bfb8cd41641c779c18261e83ea6037cac4959664ab15f3291daf6259f63b56b2bf" -> null
       - directory_permission = "0777" -> null
       - file_permission      = "0644" -> null
       - filename             = "./../ansible/inventory.ini" -> null
-      - id                   = "76d8ab2006097bc57f578552216c53c248548723" -> null
+      - id                   = "744c7d42558153d60d0b7f4cf8bf7bb80986795b" -> null
     }
 
-Plan: 0 to add, 0 to change, 13 to destroy.
+Plan: 0 to add, 0 to change, 15 to destroy.
 
 Changes to Outputs:
-  - control_plane_private_ip = "10.0.1.46" -> null
-  - control_plane_public_ip  = "44.199.213.16" -> null
+  - control_plane_private_ip = "10.0.1.139" -> null
+  - control_plane_public_ip  = "54.226.120.81" -> null
   - worker_private_ips       = [
-      - "10.0.2.134",
-      - "10.0.2.220",
+      - "10.0.2.45",
+      - "10.0.2.146",
     ] -> null
   - worker_public_ips        = [
-      - "32.199.197.252",
-      - "32.197.187.64",
+      - "98.93.49.46",
+      - "32.197.240.195",
     ] -> null
-local_file.ansible_inventory: Destroying... [id=76d8ab2006097bc57f578552216c53c248548723]
+local_file.ansible_inventory: Destroying... [id=744c7d42558153d60d0b7f4cf8bf7bb80986795b]
 local_file.ansible_inventory: Destruction complete after 0s
-aws_route_table_association.control_plane: Destroying... [id=rtbassoc-08f5d933012b5dca0]
-aws_route_table_association.workers: Destroying... [id=rtbassoc-0bd44746fc473c8d0]
-aws_instance.control_plane: Destroying... [id=i-0a6a88406081ec4bd]
-aws_instance.worker[0]: Destroying... [id=i-053875a5c01d80494]
-aws_instance.worker[1]: Destroying... [id=i-0dad4b21340c3e16b]
-aws_route_table_association.workers: Destruction complete after 1s
+aws_route_table_association.workers[1]: Destroying... [id=rtbassoc-072a7f67ea44ea327]
+aws_route_table_association.control_plane: Destroying... [id=rtbassoc-08b578ebd8f42750a]
+aws_route_table_association.workers[0]: Destroying... [id=rtbassoc-07244347391c5661f]
+aws_instance.control_plane: Destroying... [id=i-0f65a1f361e1ead27]
+aws_instance.worker[0]: Destroying... [id=i-04c81a4c658f98f36]
+aws_instance.worker[1]: Destroying... [id=i-0c91b1de49ec42b7d]
+aws_route_table_association.workers[0]: Destruction complete after 1s
 aws_route_table_association.control_plane: Destruction complete after 1s
-aws_route_table.public: Destroying... [id=rtb-00a57aca1e99cafbe]
+aws_route_table_association.workers[1]: Destruction complete after 1s
+aws_route_table.public: Destroying... [id=rtb-0ced40d42d9017245]
 aws_route_table.public: Destruction complete after 1s
-aws_internet_gateway.k8s: Destroying... [id=igw-086f0f60cc289e4b8]
-aws_instance.worker[1]: Still destroying... [id=i-0dad4b21340c3e16b, 00m10s elapsed]
-aws_instance.worker[0]: Still destroying... [id=i-053875a5c01d80494, 00m10s elapsed]
-aws_instance.control_plane: Still destroying... [id=i-0a6a88406081ec4bd, 00m10s elapsed]
-aws_internet_gateway.k8s: Still destroying... [id=igw-086f0f60cc289e4b8, 00m10s elapsed]
-aws_instance.control_plane: Still destroying... [id=i-0a6a88406081ec4bd, 00m20s elapsed]
-aws_instance.worker[1]: Still destroying... [id=i-0dad4b21340c3e16b, 00m20s elapsed]
-aws_instance.worker[0]: Still destroying... [id=i-053875a5c01d80494, 00m20s elapsed]
-aws_instance.worker[1]: Destruction complete after 21s
-aws_internet_gateway.k8s: Still destroying... [id=igw-086f0f60cc289e4b8, 00m20s elapsed]
-aws_instance.worker[0]: Still destroying... [id=i-053875a5c01d80494, 00m30s elapsed]
-aws_instance.control_plane: Still destroying... [id=i-0a6a88406081ec4bd, 00m30s elapsed]
+aws_internet_gateway.k8s: Destroying... [id=igw-019a645b9354ba538]
+aws_instance.control_plane: Still destroying... [id=i-0f65a1f361e1ead27, 00m10s elapsed]
+aws_instance.worker[0]: Still destroying... [id=i-04c81a4c658f98f36, 00m10s elapsed]
+aws_instance.worker[1]: Still destroying... [id=i-0c91b1de49ec42b7d, 00m10s elapsed]
+aws_internet_gateway.k8s: Still destroying... [id=igw-019a645b9354ba538, 00m10s elapsed]
+aws_instance.control_plane: Still destroying... [id=i-0f65a1f361e1ead27, 00m20s elapsed]
+aws_instance.worker[0]: Still destroying... [id=i-04c81a4c658f98f36, 00m20s elapsed]
+aws_instance.worker[1]: Still destroying... [id=i-0c91b1de49ec42b7d, 00m20s elapsed]
+aws_instance.worker[1]: Destruction complete after 22s
+aws_internet_gateway.k8s: Still destroying... [id=igw-019a645b9354ba538, 00m20s elapsed]
+aws_instance.worker[0]: Still destroying... [id=i-04c81a4c658f98f36, 00m30s elapsed]
+aws_instance.control_plane: Still destroying... [id=i-0f65a1f361e1ead27, 00m30s elapsed]
 aws_internet_gateway.k8s: Destruction complete after 29s
+aws_instance.control_plane: Destruction complete after 32s
+aws_subnet.control_plane: Destroying... [id=subnet-0e1c98b6cef783662]
 aws_instance.worker[0]: Destruction complete after 32s
-aws_subnet.workers: Destroying... [id=subnet-0d4c5b8e0245bc8e8]
-aws_subnet.workers: Destruction complete after 0s
-aws_instance.control_plane: Still destroying... [id=i-0a6a88406081ec4bd, 00m40s elapsed]
-aws_instance.control_plane: Destruction complete after 42s
+aws_subnet.workers[0]: Destroying... [id=subnet-057e458de7097eb89]
+aws_security_group.k8s: Destroying... [id=sg-0e85296f3948c04ca]
 aws_key_pair.k8s: Destroying... [id=k8s-lab-key-edina]
-aws_subnet.control_plane: Destroying... [id=subnet-0bd4bd9273af56dd3]
-aws_security_group.k8s: Destroying... [id=sg-059563a3a8fe593e7]
+aws_subnet.workers[1]: Destroying... [id=subnet-0b51ea0d7257086a4]
 aws_key_pair.k8s: Destruction complete after 0s
-aws_subnet.control_plane: Destruction complete after 0s
+aws_subnet.control_plane: Destruction complete after 1s
+aws_subnet.workers[1]: Destruction complete after 1s
 aws_security_group.k8s: Destruction complete after 1s
-aws_vpc.k8s: Destroying... [id=vpc-008345f0f85f19f5f]
+aws_subnet.workers[0]: Destruction complete after 1s
+aws_vpc.k8s: Destroying... [id=vpc-067e6ab3e10bfaa67]
 aws_vpc.k8s: Destruction complete after 0s
 
-Destroy complete! Resources: 13 destroyed.
+Destroy complete! Resources: 15 destroyed.
