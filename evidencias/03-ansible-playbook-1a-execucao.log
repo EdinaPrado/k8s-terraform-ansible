@@ -7,35 +7,35 @@ ok: [k8s-control-plane]
 ok: [k8s-worker-2]
 
 TASK [common : Atualizar cache e pacotes do apt] *******************************
-changed: [k8s-worker-2]
-changed: [k8s-control-plane]
-changed: [k8s-worker-1]
+ok: [k8s-worker-2]
+ok: [k8s-control-plane]
+ok: [k8s-worker-1]
 
 TASK [common : Instalar pacotes base] ******************************************
-changed: [k8s-control-plane]
-changed: [k8s-worker-2]
-changed: [k8s-worker-1]
+ok: [k8s-worker-2]
+ok: [k8s-worker-1]
+ok: [k8s-control-plane]
 
 TASK [common : Adicionar os nós do cluster no /etc/hosts] **********************
-changed: [k8s-worker-2] => (item=k8s-control-plane)
-changed: [k8s-control-plane] => (item=k8s-control-plane)
-changed: [k8s-worker-1] => (item=k8s-control-plane)
-changed: [k8s-worker-2] => (item=k8s-worker-1)
-changed: [k8s-control-plane] => (item=k8s-worker-1)
-changed: [k8s-worker-1] => (item=k8s-worker-1)
-changed: [k8s-control-plane] => (item=k8s-worker-2)
-changed: [k8s-worker-2] => (item=k8s-worker-2)
-changed: [k8s-worker-1] => (item=k8s-worker-2)
+ok: [k8s-control-plane] => (item=k8s-control-plane)
+ok: [k8s-worker-1] => (item=k8s-control-plane)
+ok: [k8s-worker-2] => (item=k8s-control-plane)
+ok: [k8s-control-plane] => (item=k8s-worker-1)
+ok: [k8s-worker-1] => (item=k8s-worker-1)
+ok: [k8s-worker-2] => (item=k8s-worker-1)
+ok: [k8s-control-plane] => (item=k8s-worker-2)
+ok: [k8s-worker-1] => (item=k8s-worker-2)
+ok: [k8s-worker-2] => (item=k8s-worker-2)
 
 TASK [common : Configurar hostname] ********************************************
-changed: [k8s-worker-2]
-changed: [k8s-control-plane]
-changed: [k8s-worker-1]
+ok: [k8s-worker-2]
+ok: [k8s-control-plane]
+ok: [k8s-worker-1]
 
 TASK [common : Impedir que o cloud-init reescreva o hostname] ******************
-changed: [k8s-worker-2]
-changed: [k8s-control-plane]
-changed: [k8s-worker-1]
+ok: [k8s-worker-2]
+ok: [k8s-worker-1]
+ok: [k8s-control-plane]
 
 TASK [common : Desligar o swap agora] ******************************************
 skipping: [k8s-control-plane]
@@ -44,109 +44,99 @@ skipping: [k8s-worker-2]
 
 TASK [common : Remover o swap do /etc/fstab] ***********************************
 ok: [k8s-control-plane]
-ok: [k8s-worker-2]
 ok: [k8s-worker-1]
+ok: [k8s-worker-2]
 
 TASK [common : Carregar módulos do kernel no boot] *****************************
-changed: [k8s-worker-2]
-changed: [k8s-control-plane]
-changed: [k8s-worker-1]
+ok: [k8s-control-plane]
+ok: [k8s-worker-1]
+ok: [k8s-worker-2]
 
 TASK [common : Carregar módulos do kernel agora] *******************************
-changed: [k8s-worker-1] => (item=overlay)
-changed: [k8s-control-plane] => (item=overlay)
-changed: [k8s-worker-2] => (item=overlay)
-changed: [k8s-worker-1] => (item=br_netfilter)
-changed: [k8s-worker-2] => (item=br_netfilter)
-changed: [k8s-control-plane] => (item=br_netfilter)
+ok: [k8s-worker-1] => (item=overlay)
+ok: [k8s-worker-2] => (item=overlay)
+ok: [k8s-control-plane] => (item=overlay)
+ok: [k8s-worker-1] => (item=br_netfilter)
+ok: [k8s-worker-2] => (item=br_netfilter)
+ok: [k8s-control-plane] => (item=br_netfilter)
 
 TASK [common : Configurar parâmetros de sysctl] ********************************
-changed: [k8s-worker-2] => (item={'key': 'net.bridge.bridge-nf-call-iptables', 'value': 1})
-changed: [k8s-control-plane] => (item={'key': 'net.bridge.bridge-nf-call-iptables', 'value': 1})
-changed: [k8s-worker-1] => (item={'key': 'net.bridge.bridge-nf-call-iptables', 'value': 1})
-changed: [k8s-worker-2] => (item={'key': 'net.bridge.bridge-nf-call-ip6tables', 'value': 1})
-changed: [k8s-control-plane] => (item={'key': 'net.bridge.bridge-nf-call-ip6tables', 'value': 1})
-changed: [k8s-worker-1] => (item={'key': 'net.bridge.bridge-nf-call-ip6tables', 'value': 1})
-changed: [k8s-worker-2] => (item={'key': 'net.ipv4.ip_forward', 'value': 1})
-changed: [k8s-control-plane] => (item={'key': 'net.ipv4.ip_forward', 'value': 1})
-changed: [k8s-worker-1] => (item={'key': 'net.ipv4.ip_forward', 'value': 1})
+ok: [k8s-control-plane] => (item={'key': 'net.bridge.bridge-nf-call-iptables', 'value': 1})
+ok: [k8s-worker-1] => (item={'key': 'net.bridge.bridge-nf-call-iptables', 'value': 1})
+ok: [k8s-worker-2] => (item={'key': 'net.bridge.bridge-nf-call-iptables', 'value': 1})
+ok: [k8s-worker-1] => (item={'key': 'net.bridge.bridge-nf-call-ip6tables', 'value': 1})
+ok: [k8s-control-plane] => (item={'key': 'net.bridge.bridge-nf-call-ip6tables', 'value': 1})
+ok: [k8s-worker-2] => (item={'key': 'net.bridge.bridge-nf-call-ip6tables', 'value': 1})
+ok: [k8s-worker-1] => (item={'key': 'net.ipv4.ip_forward', 'value': 1})
+ok: [k8s-control-plane] => (item={'key': 'net.ipv4.ip_forward', 'value': 1})
+ok: [k8s-worker-2] => (item={'key': 'net.ipv4.ip_forward', 'value': 1})
 
 TASK [common : Aplicar os handlers pendentes agora] ****************************
 
 TASK [common : Aplicar os handlers pendentes agora] ****************************
 
 TASK [common : Aplicar os handlers pendentes agora] ****************************
-
-RUNNING HANDLER [common : Recarregar sysctl] ***********************************
-changed: [k8s-control-plane]
-changed: [k8s-worker-1]
-changed: [k8s-worker-2]
 
 TASK [containerd : Instalar containerd] ****************************************
-changed: [k8s-control-plane]
-changed: [k8s-worker-1]
-changed: [k8s-worker-2]
+ok: [k8s-control-plane]
+ok: [k8s-worker-2]
+ok: [k8s-worker-1]
 
 TASK [containerd : Criar diretório de configuração do containerd] **************
-changed: [k8s-control-plane]
-changed: [k8s-worker-1]
-changed: [k8s-worker-2]
+ok: [k8s-control-plane]
+ok: [k8s-worker-1]
+ok: [k8s-worker-2]
 
 TASK [containerd : Obter a configuração padrão do containerd] ******************
-ok: [k8s-control-plane]
 ok: [k8s-worker-1]
 ok: [k8s-worker-2]
+ok: [k8s-control-plane]
 
 TASK [containerd : Gravar config.toml com SystemdCgroup = true] ****************
-changed: [k8s-control-plane]
-changed: [k8s-worker-2]
-changed: [k8s-worker-1]
+ok: [k8s-control-plane]
+ok: [k8s-worker-1]
+ok: [k8s-worker-2]
 
 TASK [containerd : Habilitar e iniciar o containerd] ***************************
-ok: [k8s-control-plane]
-ok: [k8s-worker-2]
 ok: [k8s-worker-1]
+ok: [k8s-worker-2]
+ok: [k8s-control-plane]
 
 TASK [kubernetes : Criar diretório de chaves do apt] ***************************
 ok: [k8s-control-plane]
-ok: [k8s-worker-1]
 ok: [k8s-worker-2]
+ok: [k8s-worker-1]
 
 TASK [kubernetes : Baixar a chave GPG do repositório do Kubernetes] ************
-changed: [k8s-control-plane]
-changed: [k8s-worker-1]
-changed: [k8s-worker-2]
+ok: [k8s-worker-1]
+ok: [k8s-worker-2]
+ok: [k8s-control-plane]
 
 TASK [kubernetes : Adicionar o repositório apt do Kubernetes] ******************
-changed: [k8s-worker-2]
-changed: [k8s-control-plane]
-changed: [k8s-worker-1]
-
-TASK [kubernetes : Instalar kubelet, kubeadm e kubectl] ************************
-changed: [k8s-worker-2]
-changed: [k8s-control-plane]
-changed: [k8s-worker-1]
-
-TASK [kubernetes : Travar as versões dos pacotes (apt hold)] *******************
-changed: [k8s-worker-1] => (item=kubelet)
-changed: [k8s-control-plane] => (item=kubelet)
-changed: [k8s-worker-2] => (item=kubelet)
-changed: [k8s-control-plane] => (item=kubeadm)
-changed: [k8s-worker-1] => (item=kubeadm)
-changed: [k8s-worker-2] => (item=kubeadm)
-changed: [k8s-control-plane] => (item=kubectl)
-changed: [k8s-worker-1] => (item=kubectl)
-changed: [k8s-worker-2] => (item=kubectl)
-
-TASK [kubernetes : Habilitar o kubelet] ****************************************
+ok: [k8s-worker-1]
 ok: [k8s-control-plane]
 ok: [k8s-worker-2]
-ok: [k8s-worker-1]
 
-RUNNING HANDLER [containerd : Reiniciar containerd] ****************************
-changed: [k8s-control-plane]
-changed: [k8s-worker-1]
-changed: [k8s-worker-2]
+TASK [kubernetes : Instalar kubelet, kubeadm e kubectl] ************************
+ok: [k8s-worker-1]
+ok: [k8s-control-plane]
+ok: [k8s-worker-2]
+
+TASK [kubernetes : Travar as versões dos pacotes (apt hold)] *******************
+ok: [k8s-control-plane] => (item=kubelet)
+ok: [k8s-worker-1] => (item=kubelet)
+ok: [k8s-worker-2] => (item=kubelet)
+ok: [k8s-control-plane] => (item=kubeadm)
+ok: [k8s-worker-1] => (item=kubeadm)
+ok: [k8s-worker-2] => (item=kubeadm)
+ok: [k8s-control-plane] => (item=kubectl)
+ok: [k8s-worker-1] => (item=kubectl)
+ok: [k8s-worker-2] => (item=kubectl)
+
+TASK [kubernetes : Habilitar o kubelet] ****************************************
+ok: [k8s-worker-1]
+ok: [k8s-control-plane]
+ok: [k8s-worker-2]
 
 PLAY [Inicializar o Control Plane e instalar o Calico] *************************
 
@@ -154,37 +144,37 @@ TASK [Gathering Facts] *********************************************************
 ok: [k8s-control-plane]
 
 TASK [control-plane : Inicializar o cluster com kubeadm init] ******************
-changed: [k8s-control-plane]
+ok: [k8s-control-plane]
 
 TASK [control-plane : Criar o diretório .kube do usuário] **********************
-changed: [k8s-control-plane]
+ok: [k8s-control-plane]
 
 TASK [control-plane : Copiar o admin.conf para o ~/.kube/config do usuário] ****
-changed: [k8s-control-plane]
+ok: [k8s-control-plane]
 
 TASK [control-plane : Verificar se o Calico já está instalado] *****************
 ok: [k8s-control-plane]
 
 TASK [control-plane : Instalar o Calico] ***************************************
-changed: [k8s-control-plane]
+skipping: [k8s-control-plane]
 
 PLAY [Juntar os Workers ao cluster] ********************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [k8s-worker-2]
 ok: [k8s-worker-1]
+ok: [k8s-worker-2]
 
 TASK [worker : Verificar se o nó já entrou no cluster] *************************
-ok: [k8s-worker-2]
 ok: [k8s-worker-1]
+ok: [k8s-worker-2]
 
 TASK [worker : Gerar o comando de join no Control Plane] ***********************
-ok: [k8s-worker-2 -> k8s-control-plane(44.199.213.16)]
-ok: [k8s-worker-1 -> k8s-control-plane(44.199.213.16)]
+skipping: [k8s-worker-1]
+skipping: [k8s-worker-2]
 
 TASK [worker : Executar o join no worker] **************************************
-changed: [k8s-worker-2]
-changed: [k8s-worker-1]
+skipping: [k8s-worker-1]
+skipping: [k8s-worker-2]
 
 PLAY [Validar o cluster] *******************************************************
 
@@ -200,10 +190,10 @@ ok: [k8s-control-plane]
 TASK [Mostrar os nós] **********************************************************
 ok: [k8s-control-plane] => {
     "kubectl_nodes.stdout_lines": [
-        "NAME                STATUS   ROLES           AGE   VERSION    INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME",
-        "k8s-control-plane   Ready    control-plane   79s   v1.34.12   10.0.1.46     <none>        Ubuntu 24.04.5 LTS   7.0.0-1013-aws   containerd://2.2.1",
-        "k8s-worker-1        Ready    <none>          43s   v1.34.12   10.0.2.134    <none>        Ubuntu 24.04.5 LTS   7.0.0-1013-aws   containerd://2.2.1",
-        "k8s-worker-2        Ready    <none>          43s   v1.34.12   10.0.2.220    <none>        Ubuntu 24.04.5 LTS   7.0.0-1013-aws   containerd://2.2.1"
+        "NAME                STATUS   ROLES           AGE     VERSION    INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME",
+        "k8s-control-plane   Ready    control-plane   6m7s    v1.34.12   10.0.1.139    <none>        Ubuntu 24.04.5 LTS   7.0.0-1013-aws   containerd://2.2.1",
+        "k8s-worker-1        Ready    <none>          5m34s   v1.34.12   10.0.2.45     <none>        Ubuntu 24.04.5 LTS   7.0.0-1013-aws   containerd://2.2.1",
+        "k8s-worker-2        Ready    <none>          5m34s   v1.34.12   10.0.2.146    <none>        Ubuntu 24.04.5 LTS   7.0.0-1013-aws   containerd://2.2.1"
     ]
 }
 
@@ -213,19 +203,19 @@ TASK [Gathering Facts] *********************************************************
 ok: [k8s-control-plane]
 
 TASK [nginx-app : Criar diretório dos manifestos] ******************************
-changed: [k8s-control-plane]
+ok: [k8s-control-plane]
 
 TASK [nginx-app : Gerar o manifesto do NGINX] **********************************
-changed: [k8s-control-plane]
+ok: [k8s-control-plane]
 
 TASK [nginx-app : Aplicar o Deployment e o Service do NGINX] *******************
-changed: [k8s-control-plane]
+ok: [k8s-control-plane]
 
 TASK [nginx-app : Esperar o Deployment ficar pronto] ***************************
 ok: [k8s-control-plane]
 
 PLAY RECAP *********************************************************************
-k8s-control-plane          : ok=38   changed=24   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
-k8s-worker-1               : ok=27   changed=18   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
-k8s-worker-2               : ok=27   changed=18   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+k8s-control-plane          : ok=35   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+k8s-worker-1               : ok=23   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+k8s-worker-2               : ok=23   changed=0    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
 
