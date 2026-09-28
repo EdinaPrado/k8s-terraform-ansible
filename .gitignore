@@ -7,3 +7,4 @@ crash.log
 k8s-lab
 .env
 *.retryansible/inventory.ini
+ansible/inventory.ini
