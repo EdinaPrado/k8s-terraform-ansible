@@ -4,7 +4,7 @@ resource "aws_vpc" "k8s" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "k8s-vpc-${var.aluno}"
+    Name = "k8s-vpc"
   }
 }
 
@@ -12,27 +12,30 @@ resource "aws_internet_gateway" "k8s" {
   vpc_id = aws_vpc.k8s.id
 
   tags = {
-    Name = "k8s-igw-${var.aluno}"
+    Name = "k8s-igw"
   }
 }
 
 resource "aws_subnet" "control_plane" {
   vpc_id                  = aws_vpc.k8s.id
   cidr_block              = var.control_plane_subnet_cidr
+  availability_zone       = data.aws_availability_zones.disponiveis.names[0]
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "k8s-subnet-control-plane-${var.aluno}"
+    Name = "k8s-subnet-control-plane"
   }
 }
 
 resource "aws_subnet" "workers" {
+  count                   = 2
   vpc_id                  = aws_vpc.k8s.id
-  cidr_block              = var.workers_subnet_cidr
+  cidr_block              = cidrsubnet(var.workers_subnet_cidr, 1, count.index)
+  availability_zone       = data.aws_availability_zones.disponiveis.names[count.index]
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "k8s-subnet-workers-${var.aluno}"
+    Name = "k8s-subnet-workers-${count.index + 1}"
   }
 }
 
@@ -45,7 +48,7 @@ resource "aws_route_table" "public" {
   }
 
   tags = {
-    Name = "k8s-rt-public-${var.aluno}"
+    Name = "k8s-rt-public"
   }
 }
 
@@ -55,6 +58,7 @@ resource "aws_route_table_association" "control_plane" {
 }
 
 resource "aws_route_table_association" "workers" {
-  subnet_id      = aws_subnet.workers.id
+  count          = 2
+  subnet_id      = aws_subnet.workers[count.index].id
   route_table_id = aws_route_table.public.id
 }
