@@ -1,5 +1,5 @@
 #<img width="48" height="48" alt="image" src="https://github.com/user-attachments/assets/85b84d8c-e589-4081-8bde-54e6f3754008" />
- Cluster Kubernetes na AWS com Terraform e Ansible
+# Cluster Kubernetes na AWS com Terraform e Ansible
 
 **Autor(a):** edina
 
