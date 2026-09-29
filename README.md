@@ -1,4 +1,4 @@
-# [**Cluster Kubernetes na AWS com Terraform e Ansible**](https://github.com/EdinaPrado/k8s-terraform-ansible)
+# [**Cluster Kubernetes na AWS com Terraform e Ansible**]
 
 **Autor(a):** edina
 
